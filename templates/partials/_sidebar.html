@@ -1,0 +1,45 @@
+<div class="bg-dark border-end d-flex flex-column" id="sidebar-wrapper">
+    <div class="sidebar-heading text-center py-3 border-bottom border-secondary">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" 
+                 alt="Logo" 
+                 class="img-fluid px-3" 
+                 style="max-height: 50px; filter: brightness(0) invert(1);">
+        </a>
+    </div>
+
+    <div class="list-group list-group-flush flex-grow-1 mt-2">
+        <a href="{{ url_for('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'dashboard' }}">
+            <i class="fas fa-home me-3 text-center" style="width: 20px;"></i> Dashboard
+        </a>
+        <a href="{{ url_for('add_data') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'add_data' }}">
+            <i class="fas fa-plus me-3 text-center" style="width: 20px;"></i> Tambah Berita
+        </a>
+        <a href="{{ url_for('kelola_user') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'kelola_user' }}">
+            <i class="fas fa-users-cog me-3 text-center" style="width: 20px;"></i> Kelola User
+        </a>
+        <a href="{{ url_for('kelola_kategori') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'kelola_kategori' }}">
+            <i class="fas fa-tags me-3 text-center" style="width: 20px;"></i> Kelola Kategori
+        </a>
+        <a href="{{ url_for('kelola_hashtag') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'kelola_hashtag' }}">
+            <i class="fas fa-hashtag me-3 text-center" style="width: 20px;"></i> Kelola Hashtag
+        </a>
+        <a href="{{ url_for('kelola_komentar') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'kelola_komentar' }}">
+            <i class="fas fa-comments me-3 text-center" style="width: 20px;"></i> Kelola Komentar
+        </a>
+        <a href="{{ url_for('kelola_video') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'kelola_video' }}">
+            <i class="fas fa-video me-3 text-center" style="width: 20px;"></i> Kelola Video
+        </a>
+        <a href="{{ url_for('profil') }}" class="list-group-item list-group-item-action bg-dark text-white border-0 py-3 {{ 'active-menu' if request.endpoint == 'profil' }}">
+            <i class="fas fa-user-gear me-3 text-center" style="width: 20px;"></i> Profil Pengguna
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-footer p-3 border-top border-secondary text-center">
+        <small class="text-secondary fw-bold" style="letter-spacing: 1px;">
+            VERSI 1.0.2-BETA
+        </small>
+    </div>
+</div>

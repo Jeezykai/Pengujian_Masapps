@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3 border-bottom">
+                <h5 class="mb-0 fw-bold text-primary"><i class="fas fa-edit me-2"></i>Edit Berita</h5>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('edit_data', id=item.id) }}" method="POST" enctype="multipart/form-data">
+                    
+                    <div class="mb-3">
+                        <label for="judul" class="form-label fw-bold">Judul Berita</label>
+                        <input type="text" class="form-control" id="judul" name="judul" value="{{ item.judul }}" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="penulis" class="form-label fw-bold">Penulis</label>
+                            <input type="text" class="form-control" id="penulis" name="penulis" value="{{ item.penulis }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Kategori</label>
+                            <select class="form-select" name="id_kategori" required>
+                                {% for k in kategori %}
+                                <option value="{{ k.id }}" {{ 'selected' if k.id == item.id_kategori }}>
+                                    {{ k.nama_kategori }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="konten" class="form-label fw-bold">Konten Berita</label>
+                        <textarea class="form-control" id="konten" name="konten" rows="8" required>{{ item.konten }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Hashtag Terkait</label>
+                        <div class="border p-3 rounded bg-light">
+                            {% for h in hashtag %}
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="hashtags" value="{{ h.id }}" id="tag{{ h.id }}"
+                                    {% if h.id in selected_hashtags %} checked {% endif %}>
+                                <label class="form-check-label" for="tag{{ h.id }}">{{ h.nama_hashtag }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Gambar Unggulan</label>
+                        {% if item.gambar %}
+                        <div class="mb-2">
+                            <img src="{{ url_for('static', filename='uploads/' + item.gambar) }}" alt="Current Image" class="img-thumbnail" style="max-height: 150px;">
+                            <p class="small text-muted">Gambar saat ini: {{ item.gambar }}</p>
+                        </div>
+                        {% endif %}
+                        <input type="file" class="form-control" name="gambar" accept="image/*">
+                        <small class="text-muted">Pilih file baru jika ingin mengganti gambar.</small>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-light px-4 border">Batal</a>
+                        <button type="submit" class="btn btn-primary px-4">Simpan Perubahan</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

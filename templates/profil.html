@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center p-5">
+                <div class="mb-4">
+                    <i class="fas fa-user-circle fa-7x text-primary"></i>
+                </div>
+                <h3 class="fw-bold">{{ user.nama_lengkap }}</h3>
+                <p class="text-muted">Username: @{{ user.username }}</p>
+                <hr>
+                <div class="text-start mb-4">
+                    <label class="small text-uppercase fw-bold text-muted">Role</label>
+                    <p class="fs-5"><span class="badge bg-info text-dark">{{ user.role }}</span></p>
+                    
+                    <label class="small text-uppercase fw-bold text-muted">Bergabung Sejak</label>
+                    <p>{{ user.created_at }}</p>
+                </div>
+                <button class="btn btn-primary px-4">Edit Profil</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

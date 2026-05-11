@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-white py-3 border-bottom">
+                <h5 class="mb-0 fw-bold text-primary"><i class="fas fa-user-plus me-2"></i>Tambah Pengguna Baru</h5>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('add_user') }}" method="POST">
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label fw-semibold">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username unik" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nama_lengkap" class="form-label fw-semibold">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Contoh: Budi Santoso" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label fw-semibold">Hak Akses (Role)</label>
+                        <select class="form-select" id="role" name="role" required>
+                            <option value="" disabled selected>-- Pilih Role Pengguna --</option>
+                            <option value="admin">Admin</option>
+                            <option value="dosen">Dosen</option>
+                            <option value="mahasiswa">Mahasiswa</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-semibold">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                        <a href="{{ url_for('kelola_user') }}" class="btn btn-light px-4 border">Batal</a>
+                        <button type="submit" class="btn btn-primary px-4">Simpan Pengguna</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

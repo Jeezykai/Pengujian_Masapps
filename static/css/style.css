@@ -1,0 +1,127 @@
+/*  1. STYLING UNTUK HALAMAN LOGIN & UMUM */
+body {
+    background-image: url("../bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden; /* Mencegah scroll horizontal saat sidebar digeser */
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: none;
+}
+
+.logo-login {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================================
+   2. STYLING UNTUK DASHBOARD ADMIN 
+
+/* Pmbungkus utama menggunakan flexbox */
+#wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* --- PENGATURAN TAMPILAN SIDEBAR --- */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+    background: #212529; 
+    color: #fff;
+    transition: margin 0.3s ease-out; /* Animasi mulus saat buka&tutup */
+    display: flex;
+    flex-direction: column; /* Mengatur susunan vertikal agar versi turun ke bawah */
+    z-index: 1000;
+}
+
+/* Mmbatasi lebar menu agar pas di sidebar */
+#sidebar-wrapper .list-group {
+    width: 250px;
+    flex-grow: 1; /* Mndorong area versi ke paling bawah */
+}
+
+
+/* --- LOGIKA TOGGLE MENU (SHOW HIDE) --- */
+/* geser sidebar ke kiri */
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+}
+
+
+/* --- EFEK HOVER & AKTIF PADA MENU SIDEBAR --- */
+.list-group-item.active-menu {
+    background-color: #0d6efd !important;
+    color: white !important;
+    font-weight: bold;
+    border-left: 4px solid #fff !important; /* Penanda visual menu aktif */
+}
+
+.list-group-item:hover:not(.active-menu) {
+    background-color: #343a40 !important;
+    color: #f8f9fa !important;
+    padding-left: 20px !important; /* Efek teks bergeser(saat di-hover) */
+    transition: all 0.3s;
+}
+
+/* Animasi saat logodiklik/dihover */
+.sidebar-heading img {
+    transition: transform 0.3s ease;
+}
+
+.sidebar-heading img:hover {
+    transform: scale(1.05);
+}
+
+.sidebar-footer {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- RSPONSIVITAS MOBILE --- */
+/* Dilayar HP (di bawah 768px), sidebar otomtis disembunyikan di awal */
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: -250px;
+    }
+    /* Saat tmbol ditekan di HP, kmbalikan posisi sidebar */
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
+
+/* Video Section */
+.video-section { 
+    background-color: #1a1d20; 
+    color: white; 
+    padding: 80px 0; 
+    border-radius: 50px; 
+}
+
+.video-card { 
+    background: #2b3035; /* Warna kartu */
+    border-radius: 15px; 
+    overflow: hidden; 
+    border: 1px solid #3d4246; /* Border */
+    transition: 0.3s;
+}
+
+/* warna judul video */
+.video-card .card-body h6 {
+    color: #ffffff !important; /* judul */
+}
+
+/* warna deskripsi video */
+.video-card .card-body .text-muted {
+    color: #adb5bd !important; 
+}
+
+.video-card:hover {
+    border-color: #0d6efd; /* efek biru(hover) */
+    transform: translateY(-5px);
+}
