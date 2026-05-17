@@ -79,34 +79,27 @@ class KelolaKategoriPageTest:
             print(f"[FAIL] Gagal Tamb + Verifikasi: {e}")
             self.driver.refresh()
 
-    # def test_hapus_kategori(self):
-    #     """Menguji proses Hapus Kategori."""
-    #     print(f"\n[CRUD - DELETE] Menguji Hapus Kategori: {self.target_kategori}...")
-    #     try:
-    #         # Selektor khusus: Cari baris yang ada nama kategori kita, lalu cari tombol aksi di sampingnya
-    #         # HTML kamu pakai: <button class="btn btn-light btn-sm text-danger border">
-    #         xpath_hapus = f"//tr[td//span[contains(text(), '{self.target_kategori}')]]//button[contains(@class, 'text-danger')]"
+    def test_hapus_kategori(self):
+        """Menguji proses Hapus Kategori."""
+        print(f"\n[CRUD - DELETE] Menguji Hapus Kategori: {self.target_kategori}...")
+        try:
+            xpath_hapus = f"//tr[contains(., '{self.target_kategori}')]//button[contains(@class, 'btn-hapus')]"
+            btn_hapus = self.wait.until(EC.element_to_be_clickable((By.XPATH, xpath_hapus)))
             
-    #         btn_hapus = self.wait.until(EC.element_to_be_clickable((By.XPATH, xpath_hapus)))
-            
-    #         # Scroll biar pas di tengah layar
-    #         self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn_hapus)
-    #         time.sleep(1)
-            
-    #         # Klik tombol hapus
-    #         btn_hapus.click()
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn_hapus)
+            time.sleep(1)
+            btn_hapus.click()
 
-    #         # Handle Alert Konfirmasi
-    #         print("[INFO] Menunggu alert konfirmasi...")
-    #         self.wait.until(EC.alert_is_present())
-    #         time.sleep(1)
-    #         self.driver.switch_to.alert.accept() 
+            print("[INFO] Menunggu alert konfirmasi...")
+            self.wait.until(EC.alert_is_present())
+            time.sleep(1)
+            self.driver.switch_to.alert.accept() 
             
-    #         print(f"[PASS] Kategori '{self.target_kategori}' berhasil dibasmi!")
-    #         time.sleep(2)
+            print(f"[PASS] Kategori '{self.target_kategori}' berhasil dihapus!")
+            time.sleep(2)
 
-    #     except Exception as e:
-    #         print(f"[FAIL] Gagal Hapus: {e}")
+        except Exception as e:
+            print(f"[FAIL] Gagal Hapus Kategori: {e}")
 
     def close(self):
         print("\n[DONE] Selesai. Menutup browser...")
@@ -120,5 +113,5 @@ if __name__ == "__main__":
     time.sleep(1)
     bot.navigasi_ke_kelola_kategori()
     bot.test_tambah_kategori()
-    # bot.test_hapus_kategori()
+    bot.test_hapus_kategori()
     bot.close()

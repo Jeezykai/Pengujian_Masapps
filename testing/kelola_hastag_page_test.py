@@ -74,24 +74,27 @@ class KelolaHashtagPageTest:
         except Exception as e:
             print(f"[FAIL] Gagal Tambah Hashtag: {e}")
 
-    # def test_hapus_hashtag(self):
-    #     print(f"\n[CRUD - DELETE] Menguji Hapus Hashtag: {self.target_hashtag}...")
-    #     try:
-    #         xpath_hapus = f"//tr[td/code[contains(text(), '{self.target_hashtag}')]]//button[contains(@class, 'text-danger')]"
-    #         btn_hapus = self.wait.until(EC.element_to_be_clickable((By.XPATH, xpath_hapus)))
-    #         self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn_hapus)
-    #         time.sleep(1)
-    #         btn_hapus.click()
-
-    #         self.wait.until(EC.alert_is_present())
-    #         time.sleep(1)
-    #         self.driver.switch_to.alert.accept() 
+    def test_hapus_hashtag(self):
+        """Menguji proses Hapus Hashtag."""
+        print(f"\n[CRUD - DELETE] Menguji Hapus Hashtag: {self.target_hashtag}...")
+        try:
+            xpath_hapus = f"//tr[contains(., '{self.target_hashtag}')]//button[contains(@class, 'btn-hapus')]"
+            btn_hapus = self.wait.until(EC.element_to_be_clickable((By.XPATH, xpath_hapus)))
             
-    #         print(f"[PASS] Hashtag '{self.target_hashtag}' berhasil dihapus.")
-    #         time.sleep(1.5)
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn_hapus)
+            time.sleep(1)
+            btn_hapus.click()
 
-    #     except Exception as e:
-    #         print(f"[FAIL] Gagal Hapus Hashtag: {e}")
+            print("[INFO] Menunggu alert konfirmasi...")
+            self.wait.until(EC.alert_is_present())
+            time.sleep(1)
+            self.driver.switch_to.alert.accept() 
+            
+            print(f"[PASS] Hashtag '{self.target_hashtag}' berhasil dihapus!")
+            time.sleep(2)
+
+        except Exception as e:
+            print(f"[FAIL] Gagal Hapus Hashtag: {e}")
 
     def close(self):
         print("\n[DONE] Selesai. Menutup browser...")
@@ -105,5 +108,5 @@ if __name__ == "__main__":
     time.sleep(1)
     bot.navigasi_ke_kelola_hashtag()
     bot.test_tambah_hashtag()
-    # bot.test_hapus_hashtag()
+    bot.test_hapus_hashtag()
     bot.close()

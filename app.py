@@ -168,6 +168,21 @@ def add_kategori():
     flash("Kategori berhasil ditambah!", "success")
     return redirect(url_for('kelola_kategori'))
 
+@app.route('/delete-kategori/<int:id>', methods=['POST'])
+@login_required
+def delete_kategori(id):
+    cur = mysql.connection.cursor()
+    try:
+        cur.execute("DELETE FROM kategori WHERE id = %s", (id,))
+        mysql.connection.commit()
+        flash("Kategori berhasil dihapus!", "success")
+    except Exception as e:
+        mysql.connection.rollback()
+        flash("Gagal menghapus! Kategori ini masih terikat dengan data berita.", "danger")
+    finally:
+        cur.close()
+    return redirect(url_for('kelola_kategori'))
+
 # --- CRUD HASHTAG ---
 @app.route('/kelola-hashtag')
 @login_required
@@ -187,6 +202,21 @@ def add_hashtag():
     mysql.connection.commit()
     cur.close()
     flash("Hashtag berhasil ditambah!", "success")
+    return redirect(url_for('kelola_hashtag'))
+
+@app.route('/delete-hashtag/<int:id>', methods=['POST'])
+@login_required
+def delete_hashtag(id):
+    cur = mysql.connection.cursor()
+    try:
+        cur.execute("DELETE FROM hashtag WHERE id = %s", (id,))
+        mysql.connection.commit()
+        flash("Hashtag berhasil dihapus!", "success")
+    except Exception as e:
+        mysql.connection.rollback()
+        flash("Gagal menghapus! Hashtag ini masih digunakan.", "danger")
+    finally:
+        cur.close()
     return redirect(url_for('kelola_hashtag'))
 
 # --- PERBARUI ADD DATA BERITA ---

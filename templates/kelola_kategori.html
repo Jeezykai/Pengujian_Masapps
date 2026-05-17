@@ -27,6 +27,17 @@
                 <h5 class="mb-0 fw-bold">Daftar Kategori</h5>
             </div>
             <div class="card-body">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                         <thead class="table-light">
@@ -42,7 +53,11 @@
                                 <td>{{ k.id }}</td>
                                 <td><span class="badge bg-soft-primary text-primary px-3">{{ k.nama_kategori }}</span></td>
                                 <td class="text-center">
-                                    <button class="btn btn-light btn-sm text-danger border"><i class="fas fa-trash"></i></button>
+                                    <form action="{{ url_for('delete_kategori', id=k.id) }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-light btn-sm text-danger border btn-hapus" onclick="return confirm('Yakin ingin menghapus kategori ini?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             {% else %}
