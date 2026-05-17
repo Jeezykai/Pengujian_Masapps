@@ -18,7 +18,7 @@
                     <label class="small text-uppercase fw-bold text-muted">Bergabung Sejak</label>
                     <p>{{ user.created_at }}</p>
                 </div>
-                <button class="btn btn-primary px-4">Edit Profil</button>
+                <a href="{{ url_for('edit_user', id=user.id) }}" class="btn btn-primary px-4">Edit Profil</a>
             </div>
         </div>
     </div>
